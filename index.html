@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="ru"> <!--<![endif]-->
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Заголовок</title>
+	<meta name="description" content="">
+
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	
+	<link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/media.css">
+
+</head>
+
+<body>
+<button id="showFilter">Show filter</button>
+    <div class="main">
+    	<div class="filter-wrap">
+    		<div class="filter-header">
+    			<h2>Choose your friend</h2> <svg class="lnr lnr-linearicons"><use xlink:href="#lnr-linearicons"></use></svg>
+<button id="closeFilter"><svg class="lnr lnr-cross"><use xlink:href="#lnr-cross"></use></svg></button>
+    		</div>
+    		<div class="wrap-window">
+    			<div class="filter-window window-1">
+    			<div class="filter-search search-1">
+    				<input id="inpFriends" type="text" placeholder="Enter names of your friends">
+    			</div>
+    			<div class="filter-friends list__1">
+    				<h2 id="titleList" class="title-list"></h2>
+					<div id="listFriends"></div>
+    			</div>		
+    		</div>
+    		<div class="filter-window window-2">
+    			<div class="filter-search search-2">
+    				<input type="text">
+    			</div>
+    			<div class="filter-friends list__2">
+    				<h2 class="title-list">
+Friends in the list</h2>
+<div id="listFriendsFilter"><ul ondrop="drop(event)" ondragover="allowDrop(event)" id="secondListGroup"></ul></div>
+
+    			</div>
+    		</div>
+    		
+    		</div>
+    		<div class="filter-footer">
+    			<button id="saveFilter">Save</button>
+    		</div>
+    	</div>
+    </div>
+
+  
+
+	<div class="loader">
+		<div class="loader_inner"></div>
+	</div>
+
+	<!--[if lt IE 9]>
+	<script src="libs/html5shiv/es5-shim.min.js"></script>
+	<script src="libs/html5shiv/html5shiv.min.js"></script>
+	<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+	<script src="libs/respond/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="libs/jquery/jquery-1.11.2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+	<script src="https://vk.com/js/api/openapi.js?146" type="text/javascript"></script>
+<script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/filter.js"></script>
+
+	
+	<script type="text/x-handlebars-template" id="friendsList">
+	   <ul class="list-group"  ondrop="drop(event)" ondragover="allowDrop(event)" id="friendsListWindow">
+        {{#each list}}
+        <li  draggable="true" ondragstart="drag(event)" id="userList drag" class="list-group-item">
+                  
+                   <div class="friend-info"> <div class="friend-img"><img src={{photo_50}} alt=""></div><a href="#" id="checkFilter">{{first_name}}  {{last_name}}</a></div>
+				   <button data-role="addUser" id="addUser"><i data-role="addUser" class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+       </ul>
+	</script>
+	
+</body>
+</html>
