@@ -119,9 +119,9 @@ new Promise(function(resolve) {
             for (var i = 0; i < serverAsk.length; i++) {
                 var nameVal = `${serverAsk[i].first_name}  ${serverAsk[i].last_name}`;
 
-                if (nameVal.trim().indexOf(currentVal) !== -1) {
+                if (nameVal.textContent.indexOf(currentVal) !== -1) {
 
-                    friendsListWindow.appendChild(temp);
+                    friendsListWindow.appendChild(nameVal.closest('li'));
 
                 }   
 
