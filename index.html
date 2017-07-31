@@ -47,12 +47,12 @@
     		</div>
     		<div class="filter-window window-2">
     			<div class="filter-search search-2">
-    				<input type="text">
+    				<input type="text" placeholder="Enter names of your friends">
     			</div>
     			<div class="filter-friends list__2">
     				<h2 class="title-list">
 Friends in the list</h2>
-<div id="listFriendsFilter"><ul ondrop="drop(event)" ondragover="allowDrop(event)" id="secondListGroup"></ul></div>
+<div id="listFriendsFilter"><ul ondrop="drop(event)" class="bla" ondragover="allowDrop(event)" id="secondListGroup"></ul></div>
 
     			</div>
     		</div>
@@ -88,7 +88,7 @@ Friends in the list</h2>
 	<script type="text/x-handlebars-template" id="friendsList">
 	   <ul class="list-group"  ondrop="drop(event)" ondragover="allowDrop(event)" id="friendsListWindow">
         {{#each list}}
-        <li  draggable="true" ondragstart="drag(event)" id="userList drag" class="list-group-item">
+        <li  draggable="true"  ondragstart="drag(event)" id="userList" class="list-group-item">
                   
                    <div class="friend-info"> <div class="friend-img"><img src={{photo_50}} alt=""></div><a href="#" id="checkFilter">{{first_name}}  {{last_name}}</a></div>
 				   <button data-role="addUser" id="addUser"><i data-role="addUser" class="fa fa-plus" aria-hidden="true"></i></button>
@@ -97,6 +97,33 @@ Friends in the list</h2>
         </li>
         {{/each}}
        </ul>
+	</script>
+
+	<script>
+	  function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+
+
+	friendsListWindow.dispatchEvent(new CustomEvent('click'));
+	
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    
+	
+	if(ev.target.classList == 'bla'){
+	
+		friendsListWindow.dispatchEvent(new CustomEvent('click'));
+		
+	}
+	
+}
+
 	</script>
 	
 </body>

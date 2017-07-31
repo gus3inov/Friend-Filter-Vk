@@ -33,7 +33,9 @@ new Promise(function(resolve) {
     });
 }).then(function() {
     return new Promise(function(resolve, reject) {
-        VK.api('users.get', { 'name_case': 'gen' }, function(response) {
+        VK.api('users.get', {
+            'name_case': 'gen'
+        }, function(response) {
 
             if (response.error) {
                 reject(new Error(response.error.error_msg));
@@ -46,30 +48,38 @@ new Promise(function(resolve) {
     })
 }).then(function() {
     return new Promise(function(resolve, reject) {
-        VK.api('friends.get', { 'fields': 'nickname, photo_50, id' }, function(response) {
+        VK.api('friends.get', {
+            'fields': 'nickname, photo_50, id'
+        }, function(response) {
             if (response.error) {
                 reject(new Error(response.error.error_msg));
             } else {
                 var source = friendsList.innerHTML,
                     templateFn = Handlebars.compile(source),
-                    template = templateFn({ list: response.response });
+                    template = templateFn({
+                        list: response.response
+                    });
 
 
                 listFriends.innerHTML = template;
 
-                resolve({serverAsk: response.response, temp: template});
+                resolve({
+                    serverAsk: response.response,
+                    temp: template
+                });
             }
         })
     })
-}).then(function({serverAsk, temp}) {
+}).then(function({
+    serverAsk,
+    temp
+}) {
 
     return new Promise(function(resolve, reject) {
 
         var addUserButton = document.querySelectorAll("#listFriends #addUser");
 
-
-
-        friendsListWindow.onclick = function(e) {
+        function addSecondWindow(e) {
 
             if (e.target.getAttribute('data-role') === 'addUser') {
 
@@ -83,7 +93,7 @@ new Promise(function(resolve) {
 
         }
 
-        secondListGroup.onclick = function(e) {
+        function addFirstWindow(e) {
 
             if (e.target.getAttribute('data-role') === 'addUser') {
 
@@ -97,38 +107,51 @@ new Promise(function(resolve) {
             }
 
         }
-        resolve({serverAsk, temp});
-       
+
+        friendsListWindow.addEventListener('click', addSecondWindow, true);
+        secondListGroup.addEventListener('click', addFirstWindow, true);
+
+        resolve({
+            serverAsk,
+            temp
+        });
+
 
     })
-}).then(function({serverAsk, temp}) {
+}).then(function({
+    serverAsk,
+    temp
+}) {
 
 
     inpFriends.oninput = function(e) {
 
 
 
-        var currentVal = this.value.trim();
+        var currentVal = this.value.trim(),
+            result = [];
 
         if (currentVal) {
 
             friendsListWindow.innerHTML = "";
-        
-    
+
+
 
             for (var i = 0; i < serverAsk.length; i++) {
                 var nameVal = `${serverAsk[i].first_name}  ${serverAsk[i].last_name}`;
 
-                if (nameVal.textContent.indexOf(currentVal) !== -1) {
+                if (nameVal.indexOf(currentVal) !== -1) {
 
-                    friendsListWindow.appendChild(nameVal.closest('li'));
+                    var newLi = document.createElement('li');
+                    newLi.textContent = nameVal;
+                    friendsListWindow.appendChild(newLi);
 
-                }   
+                }
 
             }
-    }else{
-        e.preventDefault();
-    }
+        } else {
+            listFriends.innerHTML = temp;
+        }
 
 
 
